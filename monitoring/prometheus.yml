@@ -1,6 +1,11 @@
 global:
   scrape_interval: 15s
 
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ['alertmanager:9093']
+
 scrape_configs:
   - job_name: 'prometheus'
     static_configs:
@@ -9,3 +14,13 @@ scrape_configs:
   - job_name: 'cadvisor'
     static_configs:
       - targets: ['cadvisor:8080']
+
+  - job_name: 'docker-containers'
+    static_configs:
+      - targets:
+          - 'laravel_app:80'
+          - 'laravel_redis:6379'
+          - 'laravel_nginx:80'
+
+rule_files:
+  - alert-rules.yml

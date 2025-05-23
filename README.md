@@ -144,6 +144,27 @@ docker compose -f monitoring/docker-compose.monitoring.yml up -d
 
 ---
 
+## 🔐 Secured Monitoring Access
+
+Both Grafana and Alertmanager dashboards are protected using NGINX Basic Authentication.
+
+### Access URLs:
+
+- Grafana: [http://localhost:3001](http://localhost:3001)
+- Alertmanager: [http://localhost:9094](http://localhost:9094)
+
+You will be prompted to enter a username and password.
+
+To create credentials:
+
+```bash
+htpasswd -c monitoring/nginx/.htpasswd admin
+```
+
+Credentials file is mounted into the NGINX reverse proxy.
+
+---
+
 ## 🪵 Logging Stack (Loki + Promtail + Grafana)
 
 ```bash

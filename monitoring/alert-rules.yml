@@ -1,0 +1,20 @@
+groups:
+  - name: container-health
+    rules:
+      - alert: ContainerRedisDown
+        expr: container_memory_usage_bytes{container_label_com_docker_compose_service="laravel_redis"} == 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Redis container might be unhealthy"
+          description: "Redis container is not reporting memory usage. It might be down."
+
+      - alert: ContainerLaravelDown
+        expr: container_memory_usage_bytes{container_label_com_docker_compose_service="laravel_app"} == 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Laravel container might be unhealthy"
+          description: "Laravel container is not reporting memory usage. It might be down."
