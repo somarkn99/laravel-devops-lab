@@ -17,6 +17,7 @@ laravel-devops-lab/
 ├── .github/
 │   └── workflows/              # GitHub Actions (CI/CD)
 ├── docker-compose.dev.yml     # Development setup
+├── docker-compose.staging.yml # Staging environment
 └── README.md
 ```
 
@@ -28,7 +29,7 @@ laravel-devops-lab/
 | -------------- | -------------------------------------- |
 | Laravel        | Main application framework             |
 | Docker         | Containerization of all services       |
-| Docker Compose | Service orchestration (dev)            |
+| Docker Compose | Service orchestration (dev & staging)  |
 | MySQL          | Relational database                    |
 | Redis          | Cache and queue driver                 |
 | NGINX          | Reverse proxy and HTTP server          |
@@ -82,17 +83,48 @@ You can find the workflow file at:
    php artisan migrate
    ```
 
-4. Visit your app and services:
+4. Visit:
    ```
-   Laravel App:  http://localhost:8000
-   Mailhog UI:   http://localhost:8025
+   Laravel Dev: http://localhost:8000
+   Mailhog Dev: http://localhost:8025
+   ```
+
+---
+
+## 🚀 Running the Staging Environment
+
+1. Build and start containers:
+
+   ```bash
+   docker compose -f docker-compose.staging.yml up --build -d
+   ```
+
+2. Enter the app container:
+
+   ```bash
+   docker exec -it laravel_app_staging bash
+   ```
+
+3. Set up Laravel:
+
+   ```bash
+   composer install
+   cp .env.staging .env
+   php artisan key:generate
+   php artisan migrate
+   ```
+
+4. Visit:
+   ```
+   Laravel Staging: http://localhost:8100
+   Mailhog Staging: http://localhost:8125
    ```
 
 ---
 
 ## 📌 Future Improvements
 
-- Add staging and production environments
+- Add production environment
 - Add Prometheus + Grafana for monitoring
 - Add centralized logging (Loki / ELK)
 - Add backup script and restore plan
