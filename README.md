@@ -154,6 +154,25 @@ docker compose -f monitoring/docker-compose.loki.yml up -d
 
 ---
 
+## ✅ Healthchecks (All Environments)
+
+Each environment (dev, staging, production) includes Docker Healthchecks for:
+
+- **Laravel App:** HTTP ping on `/`
+- **MySQL:** `mysqladmin ping`
+- **Redis:** `redis-cli ping`
+- **NGINX:** HTTP response check
+
+You can view container status via:
+
+```bash
+docker ps
+```
+
+Look under the `STATUS` column for `healthy`, `starting`, or `unhealthy`.
+
+---
+
 ## 📌 Future Improvements
 
 - Add production environment

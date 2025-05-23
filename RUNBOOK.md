@@ -102,6 +102,47 @@ docker compose -f monitoring/docker-compose.loki.yml up -d
 
 ---
 
+## ✅ Docker Healthchecks
+
+Docker Healthchecks are enabled for all environments (dev, staging, production) on the following services:
+
+| Service | Healthcheck Command                          |
+| ------- | -------------------------------------------- |
+| app     | `curl -f http://localhost`                   |
+| mysql   | `mysqladmin ping -h localhost -uroot -proot` |
+| redis   | `redis-cli ping`                             |
+| nginx   | `curl -f http://localhost`                   |
+
+Check container health status using:
+
+```bash
+docker ps
+```
+
+Status column will show: `healthy`, `starting`, or `unhealthy`.
+
+---
+
+### Laravel App (Dev)
+
+- http://localhost:8000 → Should return Laravel homepage
+- Check logs:
+  ```bash
+  docker logs laravel_app
+  ```
+
+### Laravel App (Staging)
+
+- http://localhost:8100
+- Use `laravel_app_staging` container logs
+
+### Queue Worker
+
+- Check `laravel_queue` or `laravel_queue_staging` logs
+- Log file inside container: `/var/www/storage/logs/worker.log`
+
+---
+
 ## 🔁 Restart Services
 
 ```bash
