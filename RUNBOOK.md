@@ -12,6 +12,32 @@ This environment simulates a real-world Laravel infrastructure using Docker, Git
 
 ## 🚀 Starting the Environment
 
+### Production
+
+```bash
+docker compose -f docker-compose.prod.yml up -d --build
+```
+
+Then enter the container:
+
+```bash
+docker exec -it laravel_app_prod bash
+composer install --optimize-autoloader --no-dev
+cp .env.prod .env
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+php artisan migrate --force
+```
+
+Access the app via:
+
+```
+https://localhost
+```
+
+> Note: Uses self-signed SSL certificates.
+
 ### Development
 
 ```bash

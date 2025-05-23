@@ -96,6 +96,42 @@ Access:
 
 ---
 
+## 🚀 Running the Production Environment
+
+```bash
+docker compose -f docker-compose.prod.yml up --build -d
+```
+
+Access:
+
+- Laravel App (Production): https://localhost
+
+> Note: SSL is self-signed. You may get a browser warning.
+
+Inside the container, optimize Laravel:
+
+```bash
+composer install --optimize-autoloader --no-dev
+cp .env.prod .env
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+php artisan migrate --force
+```
+
+---
+
+```bash
+docker compose -f docker-compose.staging.yml up --build -d
+```
+
+Access:
+
+- Laravel App (Staging): http://localhost:8100
+- Mailhog (Staging): http://localhost:8125
+
+---
+
 ## 📈 Monitoring Stack (Prometheus + Grafana + cAdvisor)
 
 ```bash
