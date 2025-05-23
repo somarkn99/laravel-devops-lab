@@ -244,3 +244,42 @@ auth_basic_user_file /etc/nginx/.htpasswd;
 ```
 
 This applies to all paths under `https://localhost`.
+
+---
+
+## ⚡ Horizon Dashboard
+
+Laravel Horizon is used for managing the queue workers visually.
+
+### Access
+
+- Dev: http://localhost:8000/horizon
+- Staging: http://localhost:8100/horizon
+- Prod: https://localhost/horizon (protected by Basic Auth)
+
+### Horizon Container
+
+Horizon is running as a separate container:
+
+```bash
+docker compose ps | grep horizon
+```
+
+### Restart Horizon
+
+```bash
+docker restart laravel_horizon
+```
+
+Or:
+
+```bash
+docker restart laravel_horizon_staging
+```
+
+### Monitor Jobs
+
+- Pending, processed, and failed jobs
+- Queue load and time performance
+
+Make sure to run `php artisan horizon:install` in your Laravel app and publish config if needed.

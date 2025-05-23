@@ -71,6 +71,19 @@ services:
     networks:
       - laravel
 
+  horizon:
+    build:
+      context: ./apps/laravel
+      dockerfile: Dockerfile
+    container_name: laravel_horizon
+    volumes:
+      - ./apps/laravel:/var/www
+    command: php artisan horizon
+    depends_on:
+      - redis
+    networks:
+      - laravel
+
 volumes:
   mysql_data_prod:
 

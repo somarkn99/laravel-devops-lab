@@ -247,3 +247,33 @@ volumes:
 ```
 
 Accessing `https://localhost` will now require a username and password.
+
+---
+
+## ⚡ Laravel Horizon
+
+Laravel Horizon is included in all environments to manage and monitor queue workers.
+
+### Access
+
+- Dev: http://localhost:8000/horizon
+- Staging: http://localhost:8100/horizon
+- Prod: https://localhost/horizon (protected)
+
+### Features
+
+- Live stats for queued jobs
+- Failed job monitoring
+- Redis performance metrics
+
+To access Horizon dashboard:
+
+```bash
+docker compose -f docker-compose.dev.yml up -d
+```
+
+Ensure Horizon container is running:
+
+```bash
+docker ps | grep horizon
+```
