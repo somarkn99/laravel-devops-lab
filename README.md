@@ -127,6 +127,26 @@ docker compose -f monitoring/docker-compose.loki.yml up -d
 
 ---
 
+## 💾 Backup Script
+
+A simple backup script is available in the `scripts/` directory. It exports the MySQL database to a `.sql` file with timestamp.
+
+### Run a manual backup:
+
+```bash
+./scripts/backup-db.sh
+```
+
+### Output:
+
+Backups are stored in the `backups/` directory, e.g.:
+
+```
+backups/backup_2025-05-23_18-50-00.sql
+```
+
+---
+
 ## 📸 Screenshots
 
 > (Add screenshots of your dashboards, logs, and app views)
