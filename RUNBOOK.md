@@ -179,3 +179,27 @@ You can also automate this using a cron job or GitHub Actions in future.
 ---
 
 _Last updated: May 2025_
+
+---
+
+## 🔐 Basic Authentication (Production)
+
+NGINX uses HTTP Basic Authentication to restrict access.
+
+### Username and Password
+
+- Username: admin
+- Password: (set using htpasswd)
+
+### File Location
+
+- `.htpasswd` is mounted into the container at: `/etc/nginx/.htpasswd`
+
+### NGINX Config Snippet
+
+```nginx
+auth_basic "Restricted Access";
+auth_basic_user_file /etc/nginx/.htpasswd;
+```
+
+This applies to all paths under `https://localhost`.

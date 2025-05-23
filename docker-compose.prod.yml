@@ -27,6 +27,7 @@ services:
       - ./apps/laravel:/var/www
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./docker/nginx/certs:/etc/nginx/certs
+      - ./docker/nginx/.htpasswd:/etc/nginx/.htpasswd
     depends_on:
       - app
     networks:

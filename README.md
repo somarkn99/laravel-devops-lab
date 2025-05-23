@@ -200,3 +200,31 @@ Full Stack Developer | DevOps Learner | GitLab & Docker Enthusiast
 ## 📝 License
 
 MIT – Feel free to use this setup for your own learning or projects.
+
+---
+
+## 🔐 Basic Authentication
+
+NGINX in production is secured with Basic Authentication.
+
+To create credentials:
+
+```bash
+htpasswd -c docker/nginx/.htpasswd admin
+```
+
+Update `default.conf` to include:
+
+```nginx
+auth_basic "Restricted Access";
+auth_basic_user_file /etc/nginx/.htpasswd;
+```
+
+Bind the file in `docker-compose.prod.yml`:
+
+```yaml
+volumes:
+  - ./docker/nginx/.htpasswd:/etc/nginx/.htpasswd
+```
+
+Accessing `https://localhost` will now require a username and password.
