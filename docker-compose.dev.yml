@@ -50,6 +50,31 @@ services:
     networks:
       - laravel
 
+  queue:
+    build:
+      context: ./apps/laravel
+      dockerfile: Dockerfile
+    container_name: laravel_queue
+    volumes:
+      - ./apps/laravel:/var/www
+      - ./docker/supervisor/laravel-worker.conf:/etc/supervisor/conf.d/laravel-worker.conf
+    command: >
+      sh -c "apt-get update &&
+             apt-get install -y supervisor &&
+             supervisord -c /etc/supervisor/conf.d/laravel-worker.conf"
+    depends_on:
+      - redis
+    networks:
+      - laravel
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: laravel_mailhog
+    ports:
+      - "8025:8025"
+    networks:
+      - laravel
+
 volumes:
   mysql_data:
 

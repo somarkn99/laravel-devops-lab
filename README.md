@@ -12,7 +12,8 @@ laravel-devops-lab/
 ├── apps/
 │   └── laravel/                # Laravel project code
 ├── docker/
-│   └── nginx/                  # NGINX config
+│   ├── nginx/                  # NGINX config
+│   └── supervisor/             # Queue worker config
 ├── .github/
 │   └── workflows/              # GitHub Actions (CI/CD)
 ├── docker-compose.dev.yml     # Development setup
@@ -31,6 +32,8 @@ laravel-devops-lab/
 | MySQL          | Relational database                    |
 | Redis          | Cache and queue driver                 |
 | NGINX          | Reverse proxy and HTTP server          |
+| Mailhog        | Development mail catcher               |
+| Supervisor     | Runs Laravel queue worker              |
 | GitHub Actions | CI pipeline for testing and deployment |
 
 ---
@@ -79,9 +82,10 @@ You can find the workflow file at:
    php artisan migrate
    ```
 
-4. Visit:
+4. Visit your app and services:
    ```
-   http://localhost:8000
+   Laravel App:  http://localhost:8000
+   Mailhog UI:   http://localhost:8025
    ```
 
 ---
