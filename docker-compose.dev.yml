@@ -9,11 +9,17 @@ services:
     working_dir: /var/www
     volumes:
       - ./apps/laravel:/var/www
+    environment:
+      - APP_ENV=local
     depends_on:
       - mysql
       - redis
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s -o /dev/null -w '%{http_code}' http://localhost | grep -qE '200|401'",
+        ]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -25,13 +31,20 @@ services:
     container_name: laravel_nginx
     ports:
       - "8000:80"
+      - "443:443"
     volumes:
       - ./apps/laravel:/var/www
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/certs:/etc/nginx/certs
+      - ./docker/nginx/.htpasswd:/etc/nginx/.htpasswd
     depends_on:
       - app
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s -o /dev/null -w '%{http_code}' http://localhost | grep -qE '200|401'",
+        ]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -40,10 +53,10 @@ services:
 
   mysql:
     image: mysql:8
-    container_name: laravel_mysql
+    container_name: laravel_mysql_dev
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: laravel
+      MYSQL_DATABASE: laravel_devops_lab_dev
       MYSQL_ROOT_PASSWORD: root
     ports:
       - "3307:3306"
@@ -68,7 +81,9 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - laravel
+      laravel:
+        aliases:
+          - redis
 
   queue:
     build:
@@ -92,6 +107,7 @@ services:
     container_name: laravel_mailhog
     ports:
       - "8025:8025"
+      - "1025:1025"
     networks:
       - laravel
 

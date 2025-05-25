@@ -1,24 +1,35 @@
+# global:
+#   resolve_timeout: 5m
+
+# route:
+#   # receiver: telegram
+#   - name: 'default'
+
+# receivers:
+#   # - name: telegram
+#   #   telegram_configs:
+#   #     - bot_token: 'YOUR_BOT_TOKEN'
+#   #       chat_id: YOUR_CHAT_ID
+#   #       message: |
+#   #         🚨 *{{ .Status | toUpper }}*  
+#   #         *Alert:* {{ .Labels.alertname }}  
+#   #         *Service:* {{ .Labels.service }}  
+#   #         *Description:* {{ .Annotations.description }}  
+#   #         *Time:* {{ .StartsAt }}
+#   - name: 'default'
+
+# inhibit_rules:
+#   - source_match:
+#       severity: 'critical'
+#     target_match:
+#       severity: 'warning'
+#     equal: ['alertname', 'service']
+
 global:
   resolve_timeout: 5m
 
 route:
-  receiver: telegram
+  receiver: default
 
 receivers:
-  - name: telegram
-    telegram_configs:
-      - bot_token: 'YOUR_BOT_TOKEN'
-        chat_id: YOUR_CHAT_ID
-        message: |
-          🚨 *{{ .Status | toUpper }}*  
-          *Alert:* {{ .Labels.alertname }}  
-          *Service:* {{ .Labels.service }}  
-          *Description:* {{ .Annotations.description }}  
-          *Time:* {{ .StartsAt }}
-
-inhibit_rules:
-  - source_match:
-      severity: 'critical'
-    target_match:
-      severity: 'warning'
-    equal: ['alertname', 'service']
+  - name: default

@@ -30,6 +30,8 @@ services:
       - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
     ports:
       - "9093:9093"
+    networks:
+      - monitoring
 
   nginx_auth:
     image: nginx:alpine
@@ -61,7 +63,7 @@ services:
     image: gcr.io/cadvisor/cadvisor:latest
     container_name: cadvisor
     ports:
-      - "8080:8080"
+      - "8089:8080"
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
