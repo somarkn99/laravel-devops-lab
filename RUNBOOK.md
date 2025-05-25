@@ -21,7 +21,7 @@ docker compose -f docker-compose.prod.yml up -d --build
 Then enter the container:
 
 ```bash
-docker exec -it laravel_app_prod bash
+docker exec -it laravel_app bash
 composer install --optimize-autoloader --no-dev
 cp .env.prod .env
 php artisan config:cache

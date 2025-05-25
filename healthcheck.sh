@@ -10,7 +10,7 @@ docker ps --format "table {{.Names}}\t{{.Status}}" | grep laravel_
 echo ""
 
 # ❤️ Check health status of each service
-services=("laravel_app_prod" "laravel_nginx_prod" "laravel_mysql_prod" "laravel_redis_prod")
+services=("laravel_app" "laravel_nginx" "laravel_mysql" "laravel_redis")
 for service in "${services[@]}"
 do
     echo "🔎 Checking health for: $service"
@@ -36,7 +36,7 @@ curl -s -o /dev/null -w "🔁 HTTP Status: %{http_code}\n" http://localhost:8088
 # 🧾 Check Laravel logs (if any errors exist)
 echo ""
 echo "📜 Last 10 lines of Laravel log (if exists):"
-docker exec laravel_app_prod bash -c "tail -n 10 storage/logs/laravel.log 2>/dev/null || echo 'No log file found.'"
+docker exec laravel_app bash -c "tail -n 10 storage/logs/laravel.log 2>/dev/null || echo 'No log file found.'"
 
 echo ""
 echo "🧪 Health check complete."

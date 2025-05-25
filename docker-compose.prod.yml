@@ -5,7 +5,7 @@ services:
     build:
       context: ./apps/laravel
       dockerfile: Dockerfile
-    container_name: laravel_app_prod
+    container_name: laravel_app
     working_dir: /var/www
     volumes:
       - ./apps/laravel:/var/www
