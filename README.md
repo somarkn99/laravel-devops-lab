@@ -231,9 +231,9 @@ backups/backup_2025-05-23_18-50-00.sql
 
 ## 📚 Author
 
-**Somar Kisen**  
+**Somar Kesen**  
 Full Stack Developer | DevOps Learner | GitLab & Docker Enthusiast  
-🔗 [LinkedIn](https://www.linkedin.com/in/YOUR_USERNAME) – [GitHub](https://github.com/YOUR_USERNAME)
+🔗 [LinkedIn](https://www.linkedin.com/in/somarkesen/) – [GitHub](https://github.com/somarkn99)
 
 ---
 
