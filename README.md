@@ -223,12 +223,6 @@ backups/backup_2025-05-23_18-50-00.sql
 
 ---
 
-## 📸 Screenshots
-
-> (Add screenshots of your dashboards, logs, and app views)
-
----
-
 ## 📚 Author
 
 **Somar Kesen**  
